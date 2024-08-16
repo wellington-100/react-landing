@@ -1,0 +1,17 @@
+@import '../layout/variables.scss';
+
+form {
+    border: 1px solid $colorDark;
+    padding: $spacer;
+    margin-top: $spacer;
+    margin-bottom: $spacer;
+    label {
+        display: block;
+        // text-align: start;
+        padding: 0.5 * $spacer;
+
+        input, button {
+            padding: 0.25 $spacer
+        };
+    }
+}
