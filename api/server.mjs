@@ -174,6 +174,14 @@ const server = http.createServer((req, res) => {
     } else if (req.url.startsWith('/api/pay/success')) {
         let orderId = req.url.split('/').pop().split('?')[0]
         console.log("Client payed for order: ", orderId)
+        sql `UPDATE orders
+            SET is_payed = true
+            WHERE id = ${orderId}
+            `.then(() => {
+                // display a message
+                res.setHeader("refresh", "0; url=http://localhost:3000/")
+                res.end()
+            })
 
     } else {
         res.write('not found')
@@ -183,3 +191,6 @@ const server = http.createServer((req, res) => {
 
 // 3. start the server
 server.listen(8888)
+
+
+// HW access order data using pin code -> fetch -> api
