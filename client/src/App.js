@@ -1,42 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
-import Header from './layout/Header';
-import Content from './layout/Content';
-import Footer from './layout/Footer';
-import Product from './domain/Product';
 
-// HW*: how to use suspense ???
-import { getAllProducts } from './api/data';
-import {useEffect, useState} from 'react'
+import { Home } from './layout/Home';
+import { Admin } from './layout/Admin';
+import { Page_404 } from './layout/404';
 
 
-
-// const Loading = () => <div>Loading...</div>;
-
-function App() {
-
-  let [products, setProducts] = useState([])
-
-  const getProducts = () => {
-    (async () => {
-      let productsData = await getAllProducts()
-      setProducts(productsData)
-    })()
-  }
-
-  useEffect(getProducts, [])
+function App({pathname}) {
 
   return (
-    <div className="App">
-        <Header />
-
-        <Content>
-          {products.map(product => <Product {...product}/>)}
-        </Content>
-
-        <Footer />
-    </div>
-  );
+    <div> { pathname === "/" ? <Home /> 
+    : pathname === "/admin" ? <Admin /> : <Page_404 />} </div>
+  )
 }
 
 export default App;
@@ -45,35 +20,3 @@ export default App;
 
 
 
-
-// import logo from './logo.svg';
-// import './App.css';
-// import Header from './layout/Header';
-// import Content from './layout/Content';
-// import Footer from './layout/Footer';
-// import Product from './domain/product';
-
-// // HW*: how to use suspense ???
-// import { getAllProducts } from './api/data';
-// import React, { Suspense } from 'react';
-
-
-// const Loading = () => <div>Loading...</div>;
-
-// function App() {
-//   return (
-//     <div className="App">
-//         <Header />
-//         <Suspense fallback={<Loading />}>
-//           <Content>
-//             <Product />
-//             <Product />
-//             <Product />
-//           </Content>
-//         </Suspense>
-//         <Footer />
-//     </div>
-//   );
-// }
-
-// export default App;
